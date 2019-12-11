@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="Moq" Version="4.13.1" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="coverlet.collector" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.Core\EmployeeMeeting.Domain.Core.csproj" />
+    <ProjectReference Include="..\Domain.Interfaces\EmployeeMeeting.Domain.Interfaces.csproj" />
+    <ProjectReference Include="..\EmployeeMeeting.Services.Data\EmployeeMeeting.Services.Data.csproj" />
+    <ProjectReference Include="..\EmployeeMeeting.Services.Interfaces\EmployeeMeeting.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\ExampleProject\EmployeeMeeting.WebApi.csproj" />
+    <ProjectReference Include="..\Infrastructure.Data\EmployeeMeeting.Infrastructure.Data.csproj" />
+  </ItemGroup>
+
+</Project>
