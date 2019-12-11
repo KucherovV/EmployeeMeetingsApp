@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using Dapper;
+﻿using Dapper;
 using EmployeeMeeting.Domain.Core;
 using EmployeeMeeting.Domain.Interfaces;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace EmployeeMeeting.Infrastructure.Data
 {
@@ -23,7 +23,7 @@ namespace EmployeeMeeting.Infrastructure.Data
         {
             using (var db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = $"INSERT INTO City (Name, TimeZone, CountryId, TimeOffset) VALUES({city.Name}, {city.TimeZone}, {city.CountryId}, {city.TimeOffset})";
+                var sqlQuery = $"INSERT INTO City (Name, TimeZone, CountryId) VALUES('{city.Name}', '{city.TimeZone}', {city.CountryId})";
                 var cityId = db.Query<int>(sqlQuery).FirstOrDefault();
                 city.CityId = cityId;
             }

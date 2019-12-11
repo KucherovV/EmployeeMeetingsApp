@@ -4,10 +4,12 @@ using EmployeeMeeting.Api.Mappings;
 using EmployeeMeeting.Domain.Core;
 using EmployeeMeeting.Domain.Interfaces;
 using EmployeeMeeting.Infrastructure.Data;
+using EmployeeMeeting.Infrastructure.Data.UserStores;
 using EmployeeMeeting.Services.Data;
 using EmployeeMeeting.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -37,10 +39,17 @@ namespace EmployeeMeeting.Api
             services.AddScoped(typeof(ICountryService), typeof(CountryService));
             services.AddScoped(typeof(ICityService), typeof(CityService));
 
+            services.AddTransient<IUserStore<ApplicationUser>, UserStore>();
+            services.AddTransient<IRoleStore<ApplicationRole>, RoleStore>();
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddDefaultTokenProviders();
+
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new CityMappingProfile());
                 mc.AddProfile(new CountryMappingProfile());
+                mc.AddProfile(new UserMappingProfile());
             });
 
             var mapper = mappingConfig.CreateMapper();
@@ -63,6 +72,8 @@ namespace EmployeeMeeting.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
