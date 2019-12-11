@@ -1,10 +1,10 @@
-using Domain.Core;
 using EmployeeMeeting.Services.Interfaces;
 using ExampleProject.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using EmployeeMeeting.Domain.Core;
 using Xunit;
 
 namespace EmployeeMeeting.Test

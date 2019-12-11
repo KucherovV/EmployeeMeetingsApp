@@ -1,44 +1,48 @@
-﻿using Domain.Core;
-using Domain.Interfaces;
+﻿using EmployeeMeeting.Domain.Core;
+using EmployeeMeeting.Domain.Interfaces;
 using EmployeeMeeting.Services.Interfaces;
-using System;
 using System.Collections.Generic;
 
 namespace EmployeeMeeting.Services.Data
 {
     public class CityService : ICityService
     {
-        private readonly ICityRepository _repo;
-        
-        public CityService(ICityRepository repository)
+        private readonly IRepository<City> _repository;
+
+        public CityService(IRepository<City> repository)
         {
-            _repo = repository;
+            _repository = repository;
         }
-        public void Create(City city)
+
+        public City Create(City city)
         {
-            _repo.Create(city);
+            city = _repository.Create(city);
+
+            return city;
         }
 
         public void Delete(int id)
         {
-            _repo.Delete(id);
+            _repository.Delete(id);
         }
 
         public City GetCity(int id)
         {
-            var city = _repo.Get(id);
+            var city = _repository.Get(id);
             return city;
         }
 
         public IEnumerable<City> GetCities()
         {
-            var cities = _repo.GetList();
+            var cities = _repository.GetList();
             return cities;
         }
 
-        public void Update(City city)
+        public City Update(City city)
         {
-            _repo.Update(city);
+            city = _repository.Update(city);
+
+            return city;
         }
     }
 }

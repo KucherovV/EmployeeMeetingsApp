@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace ExampleProject
+namespace EmployeeMeeting.Api
 {
     public class Program
     {

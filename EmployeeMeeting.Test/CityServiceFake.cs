@@ -1,11 +1,4 @@
-﻿using Domain.Core;
-using EmployeeMeeting.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace EmployeeMeeting.Test
+﻿namespace EmployeeMeeting.Test
 {
     class CityServiceFake : ICityService
     {

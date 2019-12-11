@@ -1,20 +1,8 @@
-using Domain.Core;
-using Domain.Interfaces;
-using EmployeeMeeting.Services.Data;
-using EmployeeMeeting.Services.Interfaces;
-using ExampleProject.Controllers;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Xunit;
-
 namespace EmployeeMeeting.IntegrationTests
 {
     public class CityIntegrationTest
     {
-        
+
         private CityController _cityController;
         private ICityService _service;
         private Mock<ICityRepository> repoMock;
@@ -32,13 +20,13 @@ namespace EmployeeMeeting.IntegrationTests
             repoMock.Setup(repo => repo.GetList())
                 .Returns(new List<City>() { new City { CityId = 1, CountryId = 1, Name = "Kiev", TimeOffset = "", TimeZone = "" },
                                             new City { CityId = 2, CountryId = 2, Name = "Grodno", TimeOffset = "", TimeZone = "" } });
-           
+
             //Act
             var result = _cityController.GetCities();
             var Okresult = Assert.IsType<OkObjectResult>(result);
-            
+
             //Assert
-            Assert.Equal(2,(Okresult.Value as List<City>).Count);
+            Assert.Equal(2, (Okresult.Value as List<City>).Count);
         }
         [Fact]
         public void GetCity_ExistingIdPassed_ReturnsRightItem()
@@ -47,10 +35,10 @@ namespace EmployeeMeeting.IntegrationTests
             var id = 2;
             repoMock.Setup(repo => repo.Get(id))
                 .Returns(GetCityTest(id));
-            
+
             //Act
             var result = _cityController.GetCity(id);
-            
+
             //Assert
             var Okresult = Assert.IsType<ObjectResult>(result);
             Assert.Equal("Kiev", (Okresult.Value as City).Name);
@@ -75,6 +63,6 @@ namespace EmployeeMeeting.IntegrationTests
             return cities.First(c => c.CityId == id);
         }
 
-        
+
     }
 }

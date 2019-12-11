@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -19,7 +19,6 @@
     <ProjectReference Include="..\Domain.Interfaces\EmployeeMeeting.Domain.Interfaces.csproj" />
     <ProjectReference Include="..\EmployeeMeeting.Services.Data\EmployeeMeeting.Services.Data.csproj" />
     <ProjectReference Include="..\EmployeeMeeting.Services.Interfaces\EmployeeMeeting.Services.Interfaces.csproj" />
-    <ProjectReference Include="..\ExampleProject\EmployeeMeeting.WebApi.csproj" />
     <ProjectReference Include="..\Infrastructure.Data\EmployeeMeeting.Infrastructure.Data.csproj" />
   </ItemGroup>
 

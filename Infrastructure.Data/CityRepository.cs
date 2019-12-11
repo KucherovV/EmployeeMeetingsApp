@@ -1,62 +1,78 @@
-﻿using Dapper;
-using Domain.Core;
-using Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using Dapper;
+using EmployeeMeeting.Domain.Core;
+using EmployeeMeeting.Domain.Interfaces;
 
-namespace Infrastructure.Data
+namespace EmployeeMeeting.Infrastructure.Data
 {
-    public class CityRepository : ICityRepository
+    public class CityRepository : IRepository<City>
     {
-        string connectionString = null;
-        public CityRepository(string connectionstr)
+        private readonly IDatabaseConnectionFactory _connectionFactory;
+        private readonly string _connectionString;
+
+        public CityRepository(IDatabaseConnectionFactory connectionFactory)
         {
-            connectionString = connectionstr;
+            _connectionFactory = connectionFactory;
+
+            _connectionString = _connectionFactory.GetConnection().ConnectionString;
         }
-        public void Create(City city)
+
+        public City Create(City city)
         {
-            using (var db = new SqlConnection(connectionString))
+            using (var db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = "INSERT INTO City (Name, TimeZone, CountryId, TimeOffset) VALUES(@Name, @TimeZone, @CountryId, @TimeOffset)";
-                db.Execute(sqlQuery, city);
+                var sqlQuery = $"INSERT INTO City (Name, TimeZone, CountryId, TimeOffset) VALUES({city.Name}, {city.TimeZone}, {city.CountryId}, {city.TimeOffset})";
+                var cityId = db.Query<int>(sqlQuery).FirstOrDefault();
+                city.CityId = cityId;
             }
+
+            return city;
         }
 
         public void Delete(int id)
         {
-            using (var db = new SqlConnection(connectionString))
+            using (var db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = "DELETE FROM City WHERE Id = @id";
-                db.Execute(sqlQuery, new { id });
-            }
-        }
-
-        public IEnumerable<City> GetList()
-        {
-            using (var db = new SqlConnection(connectionString))
-            {
-                return db.Query<City>("SELECT * FROM City").ToList();
+                var sqlQuery = $"DELETE FROM City WHERE Id = {id}";
+                db.Execute(sqlQuery);
             }
         }
 
         public City Get(int id)
         {
-            using (var db = new SqlConnection(connectionString))
+            City city;
+
+            using (var db = new SqlConnection(_connectionString))
             {
-                return db.Query<City>("SELECT * FROM City WHERE CityId = @id", new { id }).FirstOrDefault();
+                city = db.Query<City>($"SELECT * FROM City WHERE CityId = {id}", new { id }).FirstOrDefault();
             }
+
+            return city;
         }
 
-        public void Update(City city)
+        public List<City> GetList()
         {
-            using (var db = new SqlConnection(connectionString))
+            List<City> cities;
+
+            using (var db = new SqlConnection(_connectionString))
             {
-                var sqlQuery = "UPDATE City SET Name = @Name, TimeZone = @TimeZone, CountryId = @CountryId, TimeOffset = @TimeOffset WHERE CityId = @CityId";
-                db.Execute(sqlQuery, city);
+                cities = db.Query<City>("SELECT * FROM City").ToList();
             }
+
+            return cities;
+        }
+
+        public City Update(City city)
+        {
+            using (var db = new SqlConnection(_connectionString))
+            {
+                var sqlQuery = $"UPDATE City SET Name = {city.Name}, TimeZone = {city.TimeZone}, CountryId = {city.CountryId}, TimeOffset = {city.TimeOffset} WHERE CityId = {city.CityId}; SELECT * FROM City WHERE CityId = {city.CityId}";
+                city = db.Query<City>(sqlQuery).FirstOrDefault();
+            }
+
+            return city;
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Domain.Core
+﻿namespace EmployeeMeeting.Domain.Core
 {
     public class City
     {

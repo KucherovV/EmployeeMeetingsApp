@@ -1,5 +1,4 @@
-﻿using Domain.Core;
-using System;
+﻿using EmployeeMeeting.Domain.Core;
 using System.Collections.Generic;
 
 namespace EmployeeMeeting.Services.Interfaces
@@ -8,8 +7,8 @@ namespace EmployeeMeeting.Services.Interfaces
     {
         IEnumerable<City> GetCities();
         City GetCity(int id);
-        void Create(City city);
-        void Update(City city);
+        City Create(City city);
+        City Update(City city);
         void Delete(int id);
     }
 }
