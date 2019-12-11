@@ -28,7 +28,6 @@ namespace EmployeeMeeting.Api
         public void ConfigureServices(IServiceCollection services)
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
-
             services.AddTransient<IDbConnection>((sp) => new SqlConnection(connectionString));
             services.AddScoped(typeof(IDatabaseConnectionFactory), typeof(DatabaseConnectionFactory));
 
