@@ -35,9 +35,14 @@ namespace EmployeeMeeting.Api.Controllers
         {
             var city = _mapper.Map<City>(model);
 
-            _cityService.Create(city);
+            var cityId = _cityService.Create(city);
 
-            return Ok(city);
+            if (cityId == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(cityId);
         }
 
         [HttpGet("{id}")]
@@ -60,14 +65,22 @@ namespace EmployeeMeeting.Api.Controllers
         {
             var city = _mapper.Map<City>(model);
 
-            var updatedCity = _cityService.Update(city);
+            var updatedCityId = _cityService.Update(city);
 
-            if (updatedCity == null)
+            if (updatedCityId == 0)
             {
                 return NotFound();
             }
 
-            return Ok(city);
+            return Ok(updatedCityId);
+        }
+
+        [HttpDelete("delete/{id}")]
+        public ActionResult Delete(int id)
+        {
+            _cityService.Delete(id);
+
+            return Ok();
         }
     }
 }

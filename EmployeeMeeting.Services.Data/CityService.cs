@@ -7,18 +7,18 @@ namespace EmployeeMeeting.Services.Data
 {
     public class CityService : ICityService
     {
-        private readonly IRepository<City> _repository;
+        private readonly IRepository<City, int> _repository;
 
-        public CityService(IRepository<City> repository)
+        public CityService(IRepository<City, int> repository)
         {
             _repository = repository;
         }
 
-        public City Create(City city)
+        public int Create(City city)
         {
-            city = _repository.Create(city);
+            var cityId = _repository.Create(city);
 
-            return city;
+            return cityId;
         }
 
         public void Delete(int id)
@@ -38,11 +38,11 @@ namespace EmployeeMeeting.Services.Data
             return cities;
         }
 
-        public City Update(City city)
+        public int Update(City city)
         {
-            city = _repository.Update(city);
+            var cityId = _repository.Update(city);
 
-            return city;
+            return cityId;
         }
     }
 }

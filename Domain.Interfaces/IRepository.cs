@@ -2,12 +2,12 @@
 
 namespace EmployeeMeeting.Domain.Interfaces
 {
-    public interface IRepository<T>
+    public interface IRepository<TEntity, TKey>
     {
-        List<T> GetList();
-        T Get(int id);
-        T Create(T entity);
-        T Update(T entity);
-        void Delete(int id);
+        List<TEntity> GetList();
+        TEntity Get(TKey id);
+        TKey Create(TEntity entity);
+        TKey Update(TEntity entity);
+        void Delete(TKey id);
     }
 }

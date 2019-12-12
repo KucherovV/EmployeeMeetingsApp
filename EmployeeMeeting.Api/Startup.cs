@@ -33,8 +33,8 @@ namespace EmployeeMeeting.Api
             services.AddTransient<IDbConnection>((sp) => new SqlConnection(connectionString));
             services.AddScoped(typeof(IDatabaseConnectionFactory), typeof(DatabaseConnectionFactory));
 
-            services.AddScoped<IRepository<Country>, CountryRepository>();
-            services.AddScoped<IRepository<City>, CityRepository>();
+            services.AddScoped<IRepository<Country, int>, CountryRepository>();
+            services.AddScoped<IRepository<City, int>, CityRepository>();
 
             services.AddScoped(typeof(ICountryService), typeof(CountryService));
             services.AddScoped(typeof(ICityService), typeof(CityService));
@@ -60,6 +60,7 @@ namespace EmployeeMeeting.Api
                 options.Filters.Add(typeof(ValidateModelStateAttribute));
             });
 
+            FastCrudEntityRegistration.Register();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

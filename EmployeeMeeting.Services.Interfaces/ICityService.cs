@@ -7,8 +7,8 @@ namespace EmployeeMeeting.Services.Interfaces
     {
         IEnumerable<City> GetCities();
         City GetCity(int id);
-        City Create(City city);
-        City Update(City city);
+        int Create(City city);
+        int Update(City city);
         void Delete(int id);
     }
 }
