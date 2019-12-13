@@ -22,19 +22,16 @@ namespace EmployeeMeeting.Infrastructure.Data
                 db.Insert(entity);
             }
 
-            var id = GetId(entity);
-
-            return id;
+            return GetId(entity);
         }
 
         public virtual void Delete(TKey id)
         {
             var idColumnName = GetIdColumnName();
-            TEntity entity;
 
             using (var db = new SqlConnection(_connectionString))
             {
-                entity = db.Find<TEntity>(x => x.Where($"{idColumnName} = {id}")).SingleOrDefault();
+                var entity = db.Find<TEntity>(x => x.Where($"{idColumnName} = {id}")).SingleOrDefault();
 
                 db.Delete(entity);
             }
@@ -43,26 +40,19 @@ namespace EmployeeMeeting.Infrastructure.Data
         public virtual TEntity Get(TKey id)
         {
             var idColumnName = GetIdColumnName();
-            TEntity entity;
 
             using (var db = new SqlConnection(_connectionString))
             {
-                entity = db.Find<TEntity>(x => x.Where($"{idColumnName} = {id}")).SingleOrDefault();
+                return db.Find<TEntity>(x => x.Where($"{idColumnName} = {id}")).SingleOrDefault();
             }
-
-            return entity;
         }
 
         public virtual List<TEntity> GetList()
         {
-            List<TEntity> entities;
-
             using (var db = new SqlConnection(_connectionString))
             {
-                entities = db.Find<TEntity>().ToList();
+                return db.Find<TEntity>().ToList();
             }
-
-            return entities;
         }
 
         public virtual TKey Update(TEntity entity)
@@ -72,9 +62,7 @@ namespace EmployeeMeeting.Infrastructure.Data
                 db.Update(entity);
             }
 
-            var id = GetId(entity);
-
-            return id;
+            return GetId(entity);
         }
 
         protected abstract TKey GetId(TEntity entity);

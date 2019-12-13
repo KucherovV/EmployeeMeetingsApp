@@ -9,16 +9,12 @@ namespace EmployeeMeeting.Infrastructure.Data
 
         protected override int GetId(City city)
         {
-            var cityId = city.CityId;
-
-            return cityId;
+            return city.CityId;
         }
 
         protected override string GetIdColumnName()
         {
-            var idColumnName = nameof(City.CityId);
-
-            return idColumnName;
+            return nameof(City.CityId);
         }
     }
 }
