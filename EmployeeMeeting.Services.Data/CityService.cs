@@ -1,6 +1,7 @@
 ﻿using EmployeeMeeting.Domain.Core;
 using EmployeeMeeting.Domain.Interfaces;
 using EmployeeMeeting.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 
 namespace EmployeeMeeting.Services.Data
@@ -40,6 +41,7 @@ namespace EmployeeMeeting.Services.Data
 
         public int Update(City city)
         {
+            TimeZoneInfo.FindSystemTimeZoneById(city.TimeZone); // TimeZone validation      
             var cityId = _repository.Update(city);
 
             return cityId;

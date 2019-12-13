@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Domain.Core\EmployeeMeeting.Domain.Core.csproj" />
     <ProjectReference Include="..\Domain.Interfaces\EmployeeMeeting.Domain.Interfaces.csproj" />
+    <ProjectReference Include="..\EmployeeMeeting.Api\EmployeeMeeting.Api.csproj" />
     <ProjectReference Include="..\EmployeeMeeting.Services.Data\EmployeeMeeting.Services.Data.csproj" />
     <ProjectReference Include="..\EmployeeMeeting.Services.Interfaces\EmployeeMeeting.Services.Interfaces.csproj" />
     <ProjectReference Include="..\Infrastructure.Data\EmployeeMeeting.Infrastructure.Data.csproj" />
