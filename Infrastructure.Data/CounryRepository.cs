@@ -7,6 +7,7 @@ namespace EmployeeMeeting.Infrastructure.Data
     public class CountryRepository : IRepository<Country, int>
     {
         //private readonly IDatabaseConnectionFactory _connectionFactory;
+
         //private readonly string _connectionString;
 
         //public CountryRepository(IDatabaseConnectionFactory connectionFactory)
